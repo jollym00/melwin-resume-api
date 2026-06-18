@@ -141,18 +141,6 @@
           }
         }
       },
-      "Skills": {
-        "type": "object",
-        "properties": {
-          "languages_frameworks": { "type": "array", "items": { "type": "string" } },
-          "backend_apis": { "type": "array", "items": { "type": "string" } },
-          "data_analytics": { "type": "array", "items": { "type": "string" } },
-          "devops_cicd": { "type": "array", "items": { "type": "string" } },
-          "cms_platforms": { "type": "array", "items": { "type": "string" } },
-          "ai_tools": { "type": "array", "items": { "type": "string" } },
-          "process": { "type": "array", "items": { "type": "string" } }
-        }
-      },
       "Education": {
         "type": "object",
         "properties": {
@@ -194,7 +182,6 @@
   "tags": [
     { "name": "Profile", "description": "Personal and contact information" },
     { "name": "Experience", "description": "Work history and roles" },
-    { "name": "Skills", "description": "Technical skills by category" },
     { "name": "Education", "description": "Academic qualifications" }
   ]
 }

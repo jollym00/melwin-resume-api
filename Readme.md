@@ -20,7 +20,6 @@ melwin-resume-api/
 ├── api/
 │   ├── profile.js       # Contact & title info
 │   ├── experience.js    # Work history
-│   ├── skills.js        # Technical skills by category
 │   └── education.js     # Degrees & institutions
 ├── vercel.json          # Routing config
 ├── package.json
@@ -78,32 +77,6 @@ Returns all work experience entries.
     "highlights": ["..."]
   }
 ]
-```
-
----
-
-### `GET /api/skills`
-Returns all technical skills grouped by category.
-
-**Query parameters:**
-
-| Param | Example | Description |
-|---|---|---|
-| `category` | `/api/skills?category=data_analytics` | Return one skill category |
-
-**Available categories:**
-- `languages_frameworks`
-- `backend_apis`
-- `data_analytics`
-- `devops_cicd`
-- `cms_platforms`
-- `ai_tools`
-- `process`
-
-```json
-{
-  "data_analytics": ["SQL", "MariaDB", "MySQL", "Azure Data services", "..."]
-}
 ```
 
 ---
