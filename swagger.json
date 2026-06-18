@@ -12,7 +12,7 @@
   },
   "servers": [
     {
-      "url": "https://melwin-resume-4756i499h-melwin1.vercel.app",
+      "url": "https://melwin-resume-api.vercel.app/",
       "description": "Production"
     },
     {
