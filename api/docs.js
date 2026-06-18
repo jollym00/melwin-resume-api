@@ -8,14 +8,6 @@ export default function handler(req, res) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Melwin Jolly — Resume API Docs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui.min.css" />
-    <style>
-      body { margin: 0; background: #0f0f0f; }
-      .swagger-ui .topbar { background: #0f0f0f; border-bottom: 1px solid #222; }
-      .swagger-ui .topbar-wrapper .link span { display: none; }
-      .swagger-ui .info .title { color: #e2e2e2; }
-      .swagger-ui .info { margin: 30px 0; }
-    </style>
-  </head>
   <body>
     <div id="swagger-ui"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui-bundle.min.js"></script>
