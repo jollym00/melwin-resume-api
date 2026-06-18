@@ -1,0 +1,200 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Melwin Jolly — Resume API",
+    "description": "A serverless REST API serving resume data from a GitHub-hosted JSON file. No database required.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Melwin Jolly",
+      "email": "melwinjolly@gmail.com",
+      "url": "https://linkedin.com/in/melwinjolly"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://melwin-resume-4756i499h-melwin1.vercel.app",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development"
+    }
+  ],
+  "paths": {
+    "/api/profile": {
+      "get": {
+        "summary": "Get profile",
+        "description": "Returns name, title, location, and contact links.",
+        "operationId": "getProfile",
+        "tags": ["Profile"],
+        "responses": {
+          "200": {
+            "description": "Profile data",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Profile" },
+                "example": {
+                  "name": "Melwin Jolly",
+                  "title": "Full-Stack & Analytics Engineer | Strategy, Risk & Transactions",
+                  "location": "Melbourne, VIC",
+                  "email": "m@gmail.com",
+                  "linkedin": "linkedin.com/in/melwinjolly",
+                  "github": "github.com/melwinjolly"
+                }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/api/experience": {
+      "get": {
+        "summary": "Get work experience",
+        "description": "Returns all work experience. Filter by `id` or `company`.",
+        "operationId": "getExperience",
+        "tags": ["Experience"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Return a single role by ID",
+            "required": false,
+            "schema": { "type": "integer", "example": 2 }
+          },
+          {
+            "name": "company",
+            "in": "query",
+            "description": "Filter by company name (case-insensitive partial match)",
+            "required": false,
+            "schema": { "type": "string", "example": "Deloitte" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Experience data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/Experience" },
+                    {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Experience" }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/api/education": {
+      "get": {
+        "summary": "Get education",
+        "description": "Returns all education entries.",
+        "operationId": "getEducation",
+        "tags": ["Education"],
+        "responses": {
+          "200": {
+            "description": "Education data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Education" }
+                }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "title": { "type": "string" },
+          "location": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "linkedin": { "type": "string" },
+          "github": { "type": "string" }
+        }
+      },
+      "Experience": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "role": { "type": "string" },
+          "company": { "type": "string" },
+          "period": { "type": "string" },
+          "highlights": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "Skills": {
+        "type": "object",
+        "properties": {
+          "languages_frameworks": { "type": "array", "items": { "type": "string" } },
+          "backend_apis": { "type": "array", "items": { "type": "string" } },
+          "data_analytics": { "type": "array", "items": { "type": "string" } },
+          "devops_cicd": { "type": "array", "items": { "type": "string" } },
+          "cms_platforms": { "type": "array", "items": { "type": "string" } },
+          "ai_tools": { "type": "array", "items": { "type": "string" } },
+          "process": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "Education": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "degree": { "type": "string" },
+          "major": { "type": "string" },
+          "institution": { "type": "string" },
+          "completed": { "type": "string" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string" }
+        }
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" },
+            "example": { "error": "Not found" }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" },
+            "example": { "error": "Failed to fetch data from GitHub" }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    { "name": "Profile", "description": "Personal and contact information" },
+    { "name": "Experience", "description": "Work history and roles" },
+    { "name": "Skills", "description": "Technical skills by category" },
+    { "name": "Education", "description": "Academic qualifications" }
+  ]
+}
