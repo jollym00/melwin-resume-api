@@ -1,5 +1,5 @@
 const GITHUB_JSON_URL =
-  "https://raw.githubusercontent.com/melwinjolly/my-api-data/main/melwin-data.json";
+  "https://raw.githubusercontent.com/jollym00/my-api-resume-data/main/data.json";
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
